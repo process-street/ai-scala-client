@@ -39,123 +39,13 @@ def extraTestDependencies(scalaVersion: String) =
       Nil
   }
 
-// ws-client submodule settings (from ws-client/build.sbt CD-648 branch)
-
-lazy val playJsonVersion = settingKey[String]("Play JSON version to use")
-
-inThisBuild(
-  playJsonVersion := {
-    scalaVersion.value match {
-      case "2.12.18" => "2.8.2"
-      case "2.13.11" => "3.0.4"
-      case "3.2.2"   => "2.10.0-RC6"
-      case _         => "3.0.4"
-    }
-  }
-)
-
-val pekkoVersion = "1.1.5"
-val pekkoHttpVersion = "1.1.0"
-
-lazy val pekkoStreamLibs = Def.setting {
-  CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, 12)) =>
-      Seq(
-        "com.typesafe.akka" %% "akka-stream" % "2.6.1" exclude("com.typesafe.play", "play-json")
-      )
-    case Some((2, 13)) =>
-      Seq(
-        "org.apache.pekko" %% "pekko-stream" % pekkoVersion
-      )
-    case Some((3, 2)) =>
-      Seq(
-        "org.apache.pekko" % "pekko-stream_2.13" % pekkoVersion
-      )
-    case _ =>
-      throw new Exception("Unsupported scala version")
-  }
-}
-
-val wsLoggingLibs = Def.setting {
-  Seq(
-    "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.4.14"
-  )
-}
-
-def typesafePlayWS(version: String) = Seq(
-  "com.typesafe.play" %% "play-ahc-ws-standalone" % version exclude("com.typesafe.play", "play-json"),
-  "com.typesafe.play" %% "play-ws-standalone-json" % version exclude("com.typesafe.play", "play-json")
-)
-
-def orgPlayWS(version: String) = Seq(
-  "org.playframework" %% "play-ahc-ws-standalone" % version,
-  "org.playframework" %% "play-ws-standalone-json" % version
-)
-
-lazy val playWsDependencies = Def.setting {
-  CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, 12)) => typesafePlayWS("2.1.11")
-    case Some((2, 13)) => orgPlayWS("3.0.10")
-    case Some((3, 2))  => typesafePlayWS("2.2.0-M2")
-    case Some((3, 3))  => orgPlayWS("3.0.10")
-    case _             => orgPlayWS("3.0.10")
-  }
-}
-
-lazy val playJsonDependency = Def.setting {
-  CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, 12)) => "com.typesafe.play" %% "play-json" % playJsonVersion.value
-    case _             => "org.playframework" %% "play-json" % playJsonVersion.value
-  }
-}
-
-lazy val wsCommonSettings = Seq(
-  crossScalaVersions := List(scala212, scala213, scala3),
-  publish / skip := true
-)
-
-lazy val ws_client_core =
-  (project in file("ws-client/ws-client-core")).settings(
-    wsCommonSettings,
-    name := "ws-client-core",
-    libraryDependencies += playJsonDependency.value,
-    libraryDependencies += "com.typesafe" % "config" % "1.4.3",
-    libraryDependencies ++= wsLoggingLibs.value
-  )
-
-lazy val ws_client_core_akka =
-  (project in file("ws-client/ws-client-core-akka")).settings(
-    wsCommonSettings,
-    name := "ws-client-core-akka",
-    libraryDependencies ++= pekkoStreamLibs.value
-  ).dependsOn(ws_client_core)
-
-lazy val json_repair =
-  (project in file("ws-client/json-repair")).settings(
-    wsCommonSettings,
-    name := "json-repair",
-    libraryDependencies += playJsonDependency.value,
-    libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.16",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test,
-    libraryDependencies ++= wsLoggingLibs.value
-  )
-
-lazy val ws_client_play =
-  (project in file("ws-client/ws-client-play")).settings(
-    wsCommonSettings,
-    name := "ws-client-play",
-    libraryDependencies ++= playWsDependencies.value
-  ).dependsOn(ws_client_core_akka)
-   .aggregate(ws_client_core, ws_client_core_akka, json_repair)
-
-lazy val ws_client_play_stream =
-  (project in file("ws-client/ws-client-play-stream")).settings(
-    wsCommonSettings,
-    name := "ws-client-play-stream",
-    libraryDependencies += "org.apache.pekko" %% "pekko-http" % pekkoHttpVersion
-  ).dependsOn(ws_client_core_akka, ws_client_play)
-   .aggregate(ws_client_core, ws_client_core_akka, ws_client_play)
+// ws-client submodule - projects referenced from ws-client/build.sbt via ProjectRef
+lazy val wsClientBuild = file("ws-client")
+lazy val ws_client_core = ProjectRef(wsClientBuild, "ws-client-core")
+lazy val ws_client_core_akka = ProjectRef(wsClientBuild, "ws-client-core-akka")
+lazy val json_repair = ProjectRef(wsClientBuild, "json-repair")
+lazy val ws_client_play = ProjectRef(wsClientBuild, "ws-client-play")
+lazy val ws_client_play_stream = ProjectRef(wsClientBuild, "ws-client-play-stream")
 
 // ai-scala-client modules
 

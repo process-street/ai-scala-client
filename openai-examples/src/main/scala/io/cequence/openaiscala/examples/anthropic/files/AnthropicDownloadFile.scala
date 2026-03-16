@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.examples.anthropic.files
 
-import akka.stream.scaladsl.FileIO
+import org.apache.pekko.stream.scaladsl.FileIO
 import io.cequence.openaiscala.anthropic.service.{AnthropicService, AnthropicServiceFactory}
 import io.cequence.openaiscala.examples.ExampleBase
 

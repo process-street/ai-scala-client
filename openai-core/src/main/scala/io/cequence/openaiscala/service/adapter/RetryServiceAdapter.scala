@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.service.adapter
 
-import akka.actor.Scheduler
+import org.apache.pekko.actor.Scheduler
 import io.cequence.openaiscala.RetryHelpers
 import io.cequence.openaiscala.RetryHelpers.RetrySettings
 import io.cequence.wsclient.service.CloseableService

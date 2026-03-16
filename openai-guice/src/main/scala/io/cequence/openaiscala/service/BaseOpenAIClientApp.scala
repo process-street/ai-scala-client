@@ -1,7 +1,7 @@
 package io.cequence.openaiscala.service
 
-import akka.actor.ActorSystem
-import akka.stream.Materializer
+import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.stream.Materializer
 import com.google.inject.Module
 
 import scala.concurrent.{ExecutionContext, Future}

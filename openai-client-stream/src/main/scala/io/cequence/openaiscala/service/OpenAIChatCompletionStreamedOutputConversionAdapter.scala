@@ -1,8 +1,8 @@
 package io.cequence.openaiscala.service
 
-import akka.NotUsed
-import akka.stream.FlowShape
-import akka.stream.scaladsl.{Broadcast, Flow, GraphDSL, Source, Zip}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.FlowShape
+import org.apache.pekko.stream.scaladsl.{Broadcast, Flow, GraphDSL, Source, Zip}
 import io.cequence.openaiscala.domain.BaseMessage
 import io.cequence.openaiscala.domain.response.{ChatCompletionChunkResponse, ChunkMessageSpec}
 import io.cequence.openaiscala.domain.settings.CreateChatCompletionSettings

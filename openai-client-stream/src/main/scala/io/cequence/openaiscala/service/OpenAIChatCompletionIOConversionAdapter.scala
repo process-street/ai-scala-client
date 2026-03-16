@@ -1,7 +1,7 @@
 package io.cequence.openaiscala.service
 
-import akka.NotUsed
-import akka.stream.scaladsl.Flow
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.scaladsl.Flow
 import io.cequence.openaiscala.domain.response.ChunkMessageSpec
 import io.cequence.openaiscala.domain.{AssistantMessage, BaseMessage}
 import io.cequence.openaiscala.domain.settings.CreateChatCompletionSettings

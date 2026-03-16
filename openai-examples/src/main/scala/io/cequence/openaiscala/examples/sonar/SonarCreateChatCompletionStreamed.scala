@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.examples.sonar
 
-import akka.stream.scaladsl.Sink
+import org.apache.pekko.stream.scaladsl.Sink
 import io.cequence.openaiscala.domain.NonOpenAIModelId
 import io.cequence.openaiscala.examples.ExampleBase
 import io.cequence.openaiscala.perplexity.domain.Message.{SystemMessage, UserMessage}

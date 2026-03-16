@@ -27,34 +27,48 @@ def extraTestDependencies(scalaVersion: String) =
 
     case Some((2, 13)) =>
       Seq(
-        "com.typesafe.akka" %% "akka-actor-testkit-typed" % "2.6.20" % Test
+        "org.apache.pekko" %% "pekko-actor-testkit-typed" % "1.1.5" % Test
       )
 
     case Some((3, _)) =>
       Seq(
-        // because of conflicting cross-version suffixes 2.13 vs 3 - scala-java8-compat, etc
-        "com.typesafe.akka" % "akka-actor-testkit-typed_2.13" % "2.6.20" % Test
+        "org.apache.pekko" % "pekko-actor-testkit-typed_2.13" % "1.1.5" % Test
       )
 
     case _ =>
       Nil
   }
 
+// ws-client submodule - projects referenced from ws-client/build.sbt via ProjectRef
+lazy val wsClientBuild = file("ws-client")
+lazy val ws_client_core = ProjectRef(wsClientBuild, "ws-client-core")
+lazy val ws_client_core_akka = ProjectRef(wsClientBuild, "ws-client-core-akka")
+lazy val json_repair = ProjectRef(wsClientBuild, "json-repair")
+lazy val ws_client_play = ProjectRef(wsClientBuild, "ws-client-play")
+lazy val ws_client_play_stream = ProjectRef(wsClientBuild, "ws-client-play-stream")
+
+// ai-scala-client modules
+
 lazy val core =
-  (project in file("openai-core")).settings(commonSettings *)
+  (project in file("openai-core"))
+    .settings(commonSettings *)
+    .dependsOn(ws_client_core_akka, json_repair)
 
 lazy val client =
-  (project in file("openai-client")).settings(commonSettings *).dependsOn(core).aggregate(core)
+  (project in file("openai-client"))
+    .settings(commonSettings *)
+    .dependsOn(core, ws_client_core, ws_client_play)
+    .aggregate(core)
 
 lazy val client_stream = (project in file("openai-client-stream"))
   .settings(commonSettings *)
-  .dependsOn(client)
+  .dependsOn(client, ws_client_core, ws_client_play, ws_client_play_stream)
   .aggregate(client)
 
 // note that for anthropic_client we provide a streaming extension within the module as well
 lazy val anthropic_client = (project in file("anthropic-client"))
   .settings(commonSettings *)
-  .dependsOn(core)
+  .dependsOn(core, ws_client_core, ws_client_play, ws_client_play_stream)
   .aggregate(core, client, client_stream)
 
 lazy val google_vertexai_client = (project in file("google-vertexai-client"))
@@ -64,13 +78,13 @@ lazy val google_vertexai_client = (project in file("google-vertexai-client"))
 
 lazy val google_gemini_client = (project in file("google-gemini-client"))
   .settings(commonSettings *)
-  .dependsOn(core)
+  .dependsOn(core, ws_client_core, ws_client_play, ws_client_play_stream)
   .aggregate(core, client, client_stream)
 
 // note that for perplexity_client we provide a streaming extension within the module as well
 lazy val perplexity_sonar_client = (project in file("perplexity-sonar-client"))
   .settings(commonSettings *)
-  .dependsOn(core)
+  .dependsOn(core, ws_client_core, ws_client_play, ws_client_play_stream)
   .aggregate(core, client, client_stream)
 
 lazy val count_tokens = (project in file("openai-count-tokens"))

@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.gemini.service
 
-import akka.stream.Materializer
+import org.apache.pekko.stream.Materializer
 import io.cequence.openaiscala.EnvHelper
 import io.cequence.openaiscala.gemini.service.impl.{
   GeminiServiceImpl,

@@ -1,0 +1,3 @@
+[submodule "ws-client"]
+	path = ws-client
+	url = https://github.com/process-street/ws-client.git

@@ -1,8 +1,8 @@
 package io.cequence.openaiscala.gemini.service.impl
 
-import akka.NotUsed
-import akka.stream.Materializer
-import akka.stream.scaladsl.Source
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.Materializer
+import org.apache.pekko.stream.scaladsl.Source
 import io.cequence.openaiscala.OpenAIScalaClientException
 import io.cequence.openaiscala.gemini.JsonFormats._
 import io.cequence.openaiscala.gemini.domain.response.{

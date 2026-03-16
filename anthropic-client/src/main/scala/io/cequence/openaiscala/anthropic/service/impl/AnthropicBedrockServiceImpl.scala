@@ -1,9 +1,9 @@
 package io.cequence.openaiscala.anthropic.service.impl
 
-import akka.NotUsed
-import akka.stream.javadsl.{Framing, FramingTruncation}
-import akka.stream.scaladsl.Source
-import akka.util.ByteString
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.javadsl.{Framing, FramingTruncation}
+import org.apache.pekko.stream.scaladsl.Source
+import org.apache.pekko.util.ByteString
 import io.cequence.wsclient.service.ws.PlayJsonUtil
 import io.cequence.openaiscala.anthropic.domain.{
   FileDeleteResponse,

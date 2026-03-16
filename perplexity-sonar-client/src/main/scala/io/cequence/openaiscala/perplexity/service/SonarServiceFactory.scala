@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.perplexity.service
 
-import akka.stream.Materializer
+import org.apache.pekko.stream.Materializer
 import io.cequence.openaiscala.EnvHelper
 import io.cequence.openaiscala.perplexity.service.impl.{
   OpenAISonarChatCompletionService,

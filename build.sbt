@@ -27,13 +27,12 @@ def extraTestDependencies(scalaVersion: String) =
 
     case Some((2, 13)) =>
       Seq(
-        "com.typesafe.akka" %% "akka-actor-testkit-typed" % "2.6.20" % Test
+        "org.apache.pekko" %% "pekko-actor-testkit-typed" % "1.1.5" % Test
       )
 
     case Some((3, _)) =>
       Seq(
-        // because of conflicting cross-version suffixes 2.13 vs 3 - scala-java8-compat, etc
-        "com.typesafe.akka" % "akka-actor-testkit-typed_2.13" % "2.6.20" % Test
+        "org.apache.pekko" % "pekko-actor-testkit-typed_2.13" % "1.1.5" % Test
       )
 
     case _ =>

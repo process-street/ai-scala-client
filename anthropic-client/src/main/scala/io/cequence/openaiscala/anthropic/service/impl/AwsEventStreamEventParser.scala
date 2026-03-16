@@ -1,9 +1,9 @@
 package io.cequence.openaiscala.anthropic.service.impl
 
-import akka.NotUsed
+import org.apache.pekko.NotUsed
 import play.api.libs.json.{JsValue, Json}
-import akka.stream.scaladsl.Flow
-import akka.util.ByteString
+import org.apache.pekko.stream.scaladsl.Flow
+import org.apache.pekko.util.ByteString
 
 object AwsEventStreamEventParser {
   def flow: Flow[ByteString, Option[JsValue], NotUsed] = Flow[ByteString].map { frame =>

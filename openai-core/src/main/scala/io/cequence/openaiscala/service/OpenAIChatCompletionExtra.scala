@@ -1,6 +1,6 @@
 package io.cequence.openaiscala.service
 
-import akka.actor.Scheduler
+import org.apache.pekko.actor.Scheduler
 import io.cequence.jsonrepair.JsonRepair
 import io.cequence.openaiscala.JsonFormats.eitherJsonSchemaFormat
 import io.cequence.openaiscala.RetryHelpers.RetrySettings

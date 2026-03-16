@@ -1,7 +1,7 @@
 package io.cequence.openaiscala.vertexai.service.impl
 
-import akka.NotUsed
-import akka.stream.scaladsl.{Source, StreamConverters}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.scaladsl.{Source, StreamConverters}
 import com.google.cloud.vertexai.VertexAI
 import com.google.cloud.vertexai.api.GenerateContentResponse
 import com.google.cloud.vertexai.generativeai.GenerativeModel

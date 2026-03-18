@@ -7,7 +7,7 @@ val scala3 = "3.2.2"
 
 ThisBuild / organization := "st.process"
 ThisBuild / scalaVersion := scala213
-ThisBuild / version := "1.3.0.RC.2-1"
+ThisBuild / version := "1.3.0.RC.2-2"
 ThisBuild / isSnapshot := false
 
 lazy val commonSettings = Seq(

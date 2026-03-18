@@ -1,4 +1,6 @@
 jdk:
   - openjdk17
+before_install:
+  - git submodule update --init --recursive
 install:
   - sbt ++2.13.11 publishM2

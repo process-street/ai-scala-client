@@ -1,0 +1,4 @@
+jdk:
+  - openjdk17
+install:
+  - sbt ++2.13.12 publishM2

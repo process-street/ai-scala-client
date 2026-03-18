@@ -5,9 +5,9 @@ val scala212 = "2.12.18"
 val scala213 = "2.13.11"
 val scala3 = "3.2.2"
 
-ThisBuild / organization := "io.cequence"
+ThisBuild / organization := "st.process"
 ThisBuild / scalaVersion := scala213
-ThisBuild / version := "1.3.0.RC.2"
+ThisBuild / version := "1.3.0.RC.2-1"
 ThisBuild / isSnapshot := false
 
 lazy val commonSettings = Seq(
@@ -157,13 +157,6 @@ ThisBuild / developers := List(
 
 ThisBuild / licenses += "MIT" -> url("https://opensource.org/licenses/MIT")
 
-ThisBuild / publishMavenStyle := true
-
-ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
-
-ThisBuild / sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
-
-ThisBuild / publishTo := sonatypePublishToBundle.value
 
 addCommandAlias(
   "validateCode",

@@ -9,6 +9,7 @@ ThisBuild / organization := "st.process"
 ThisBuild / scalaVersion := scala213
 ThisBuild / version := "1.3.0.RC.2"
 ThisBuild / isSnapshot := false
+ThisBuild / publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
 
 lazy val commonSettings = Seq(
   libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.16",

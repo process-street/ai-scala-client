@@ -9,6 +9,7 @@ ThisBuild / organization := "st.process"
 ThisBuild / scalaVersion := scala213
 ThisBuild / version := "1.3.0.RC.2-scala3"
 ThisBuild / isSnapshot := false
+ThisBuild / publishConfiguration := publishConfiguration.value.withOverwrite(true)
 ThisBuild / publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
 
 lazy val commonSettings = Seq(

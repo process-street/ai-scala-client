@@ -3,11 +3,11 @@ import sbt.Keys.test
 // Supported versions
 val scala212 = "2.12.18"
 val scala213 = "2.13.11"
-val scala3 = "3.2.2"
+val scala3 = "3.3.7"
 
 ThisBuild / organization := "st.process"
 ThisBuild / scalaVersion := scala213
-ThisBuild / version := "1.3.0.RC.2"
+ThisBuild / version := "1.3.0.RC.2-scala3"
 ThisBuild / isSnapshot := false
 
 lazy val commonSettings = Seq(
@@ -32,7 +32,7 @@ def extraTestDependencies(scalaVersion: String) =
 
     case Some((3, _)) =>
       Seq(
-        "org.apache.pekko" % "pekko-actor-testkit-typed_2.13" % "1.1.5" % Test
+        "org.apache.pekko" %% "pekko-actor-testkit-typed" % "1.1.5" % Test
       )
 
     case _ =>

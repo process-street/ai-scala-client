@@ -3,5 +3,6 @@ jdk:
 before_install:
   - git submodule update --init --recursive
 install:
-  - cd ws-client && sbt ++2.13.11 publishM2 && cd ..
+  - cd ws-client && sbt ++2.13.11 publishM2 && sbt ++3.3.7 publishM2 && cd ..
   - sbt ++2.13.11 publishM2
+  - sbt ++3.3.7 publishM2

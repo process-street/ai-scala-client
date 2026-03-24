@@ -7,7 +7,7 @@ val scala3 = "3.3.7"
 
 ThisBuild / organization := "st.process"
 ThisBuild / scalaVersion := scala213
-ThisBuild / version := "1.3.0.RC.2-scala3"
+ThisBuild / version := "1.3.0.RC.2"
 ThisBuild / isSnapshot := false
 publish / skip := true
 
